@@ -68,7 +68,7 @@ $(document).ready(function(){
         // 1) 모달 창 열리면 뒤에 화면 스크롤 안 움직이게
         $('html, body').css({height: wrapHei, overflow: 'hidden'});
         // 2) 열려진 모달을 제외한 나머지에 스크린리더 접근 제한: aria-hidden, inert
-        $md.removeAttr('aria-hidden','inert').siblings().attr({'aria-hidden': true,inert: '','tabIndex': -1});
+        $md.removeAttr('aria-hidden inert').siblings().attr({'aria-hidden': true,inert: '','tabIndex': -1});
         // 3) #dim 동적생성
         $md.before('<div id="dim"></div>');
         const $dim = $('#dim');
@@ -76,12 +76,12 @@ $(document).ready(function(){
         if ($(this).hasClass('sulwhasoo')){
             btnNum = 0;
             // 4-1) 설화수 창 보이게 함
-            $md.fadeIn().children('.modal_wrap').removeClass('active').find('ul[role="tablist"] .tab:first-child').addClass('on').siblings().removeClass('on').parent().next().show().removeAttr('aria-hidden','inert').next().hide().attr({'aria-hidden': true,inert: ''});
+            $md.fadeIn().children('.modal_wrap').removeClass('active').find('ul[role="tablist"] .tab:first-child').addClass('on').siblings().removeClass('on').parent().next().show().removeAttr('aria-hidden inert').next().hide().attr({'aria-hidden': true,inert: ''});
             }
         else{
             btnNum = 1;
             // 4-2) 코닥 창 보이게 함
-            $md.fadeIn().children('.modal_wrap').addClass('active').find('ul[role="tablist"] .tab:last-child').addClass('on').siblings().removeClass('on').parent().next().hide().attr({'aria-hidden': true,inert: ''}).next().show().removeAttr('aria-hidden','inert');
+            $md.fadeIn().children('.modal_wrap').addClass('active').find('ul[role="tablist"] .tab:last-child').addClass('on').siblings().removeClass('on').parent().next().hide().attr({'aria-hidden': true,inert: ''}).next().show().removeAttr('aria-hidden inert');
         }
         // 5) 모달 열릴때 제품이 떠오르게 만들기
         productJump(btnNum);
@@ -147,7 +147,7 @@ $(document).ready(function(){
             // 2) #dim 없애기
             $dim.remove();
             // 3) 닫힌 모달을 스크린리더 접근 제한: aria-hidden, inert 나머지는 aria-hidden, inert 없애기
-            $md.attr({'aria-hidden': true,'inert': ''}).siblings('').removeAttr('aria-hidden','inert','tabIndex');
+            $md.attr({'aria-hidden': true,'inert': ''}).siblings('').removeAttr('aria-hidden inert','tabIndex');
             // 4) .tabpanel.on 없애기 ( productJump 초기화)
             $md.find('.modal_wrap > .tabpanel').removeClass('on');
             // 5) .move_up div margin-top 없애기 ( mousewheelMove 초기화)
@@ -175,9 +175,9 @@ $(document).ready(function(){
             click: function(){
                 $md.find('.close_btn').trigger('click');            
             },
-            mousewheel: function(){
-                $md.find('.close_btn').trigger('click');   
-            }
+            // mousewheel: function(){
+            //     $md.find('.close_btn').trigger('click');   
+            // }
         });
     });
 
@@ -275,10 +275,10 @@ $(document).ready(function(){
     // 3. 열린 모달안에서 (설화수/코닥).tab 누르면 .tabpanel 바뀌게
     function changePanel ($num) {
         if ($num === 0) {
-            $mdWrap.removeClass('active').find('ul[role="tablist"] .tab:first-child').addClass('on').siblings().removeClass('on').parent().next().show().removeAttr('aria-hidden','inert').next().hide().attr({'aria-hidden': true,inert: ''});
+            $mdWrap.removeClass('active').find('ul[role="tablist"] .tab:first-child').addClass('on').siblings().removeClass('on').parent().next().show().removeAttr('aria-hidden inert').next().hide().attr({'aria-hidden': true,inert: ''});
         }
         else {
-            $mdWrap.addClass('active').find('ul[role="tablist"] .tab:last-child').addClass('on').siblings().removeClass('on').parent().next().hide().attr({'aria-hidden': true,inert: ''}).next().show().removeAttr('aria-hidden','inert');
+            $mdWrap.addClass('active').find('ul[role="tablist"] .tab:last-child').addClass('on').siblings().removeClass('on').parent().next().hide().attr({'aria-hidden': true,inert: ''}).next().show().removeAttr('aria-hidden inert');
         }        
     }
 
